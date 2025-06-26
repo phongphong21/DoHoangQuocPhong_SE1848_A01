@@ -1,0 +1,52 @@
+﻿<Window x:Class="DoHoangQuocPhongWPF.ProductWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:DoHoangQuocPhongWPF"
+        mc:Ignorable="d"
+        Title="DoHoangQuocPhong - SE182291 - Product Management" Height="550" Width="1000" WindowStartupLocation="CenterScreen"
+        Background="#f0f2f5">
+    <Border Background="White" CornerRadius="10" Padding="20" Margin="20">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+
+            <TextBlock Text="📦 Product Management" FontSize="22" FontWeight="Bold"
+                       HorizontalAlignment="Center" Margin="0,0,0,20" Foreground="#2c3e50" Grid.Row="0"/>
+
+            <StackPanel Orientation="Horizontal" Grid.Row="1" HorizontalAlignment="Center" Margin="0,0,0,20">
+                <TextBox x:Name="txtSearch" Width="600" Height="28" Margin="5"/>
+                <Button x:Name="btnSearch" Content="Search" Width="90" Height="28" Margin="5" Click="btnSearch_Click"/>
+                <Button x:Name="btnReset" Content="Reset" Width="90" Height="28" Margin="5" Click="btnReset_Click"/>
+            </StackPanel>
+
+            <DataGrid x:Name="dgProducts" Grid.Row="2" AutoGenerateColumns="False" SelectionMode="Single"
+                      CanUserAddRows="False" Margin="0,0,0,20">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Product ID" Binding="{Binding ProductId}" Width="100"/>
+                    <DataGridTextColumn Header="Name" Binding="{Binding ProductName}" Width="200"/>
+                    <DataGridTextColumn Header="Supplier" Binding="{Binding SupplierId}" Width="100"/>
+                    <DataGridTextColumn Header="Category" Binding="{Binding CategoryId}" Width="100"/>
+                    <DataGridTextColumn Header="Quantity/Unit" Binding="{Binding QuantityPerUnit}" Width="150"/>
+                    <DataGridTextColumn Header="Unit Price" Binding="{Binding UnitPrice}" Width="100"/>
+                    <DataGridTextColumn Header="Stock" Binding="{Binding UnitsInStock}" Width="80"/>
+                    <DataGridTextColumn Header="On Order" Binding="{Binding UnitsOnOrder}" Width="90"/>
+                    <DataGridTextColumn Header="Reorder Level" Binding="{Binding ReorderLevel}" Width="100"/>
+                    <DataGridCheckBoxColumn Header="Discontinued" Binding="{Binding Discontinued}" Width="100" IsReadOnly="True"/>
+                </DataGrid.Columns>
+            </DataGrid>
+
+            <StackPanel Orientation="Horizontal" Grid.Row="3" HorizontalAlignment="Center">
+                <Button x:Name="btnAdd" Content="Add" Width="90" Margin="5" Click="btnAdd_Click" Background="#2ecc71" Foreground="White"/>
+                <Button x:Name="btnUpdate" Content="Update" Width="90" Margin="5" Click="btnUpdate_Click" Background="#3498db" Foreground="White"/>
+                <Button x:Name="btnDelete" Content="Delete" Width="90" Margin="5" Click="btnDelete_Click" Background="#e67e22" Foreground="White"/>
+                <Button x:Name="btnBack" Content="Back" Width="90" Margin="5" Click="btnBack_Click" Background="#c0392b" Foreground="White"/>
+            </StackPanel>
+        </Grid>
+    </Border>
+</Window>
