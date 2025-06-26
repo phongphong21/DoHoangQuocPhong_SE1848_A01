@@ -29,7 +29,8 @@ namespace DoHoangQuocPhongWPF
 
         private void LoadProducts()
         {
-            products = productService.GetProducts();
+            products = productService.GetProducts().Where(p => !p.Discontinued).ToList();
+            dgProducts.ItemsSource = null;
             dgProducts.ItemsSource = products;
         }
 
@@ -91,16 +92,19 @@ namespace DoHoangQuocPhongWPF
         private void btnSearch_Click(object sender, RoutedEventArgs e)
         {
             var keyword = txtSearch.Text.Trim().ToLower();
-            dgProducts.ItemsSource = string.IsNullOrWhiteSpace(keyword)
-                ? products
-                : productService.GetProductByName(keyword);
+            if (string.IsNullOrWhiteSpace(keyword))
+            {
+                dgProducts.ItemsSource = products;
+            }
+            else
+            {
+                var filtered = productService.GetProductByName(keyword)
+                    .Where(p => !p.Discontinued)
+                    .ToList();
+                dgProducts.ItemsSource = filtered;
+            }
         }
 
-        private void btnReset_Click(object sender, RoutedEventArgs e)
-        {
-            txtSearch.Clear();
-            dgProducts.ItemsSource = products;
-        }
 
         private void btnBack_Click(object sender, RoutedEventArgs e)
         {
@@ -112,6 +116,11 @@ namespace DoHoangQuocPhongWPF
                 new AdminMainWindow().Show();
                 Close();
             }
+        }
+        private void btnReset_Click(object sender, RoutedEventArgs e)
+        {
+            txtSearch.Clear();
+            LoadProducts();
         }
     }
 }
